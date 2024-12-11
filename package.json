@@ -13,6 +13,8 @@
   "author": "Diana Bello, Cristia Rojas, Jaime Macías",
   "license": "ISC",
   "dependencies": {
-    "adoptionpetmobile": "file:"
+    "adoptionpetmobile": "file:",
+    "dotenv": "^16.4.7",
+    "nodemon": "^3.1.7"
   }
 }
