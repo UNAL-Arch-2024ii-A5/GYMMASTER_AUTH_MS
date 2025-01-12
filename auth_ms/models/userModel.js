@@ -8,8 +8,6 @@ var userSchema = new mongoose.Schema({
     firstname:{
         type:String,
         required:true,
-        unique:true,
-        index:true,
     },
     lastname:{
         type:String,
@@ -19,6 +17,7 @@ var userSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:true,
+        index:true,
     },
     mobile:{
         type:String,
@@ -45,6 +44,7 @@ var userSchema = new mongoose.Schema({
     refreshToken:{
         type:String,
     },
+    routines:[],
     images:[],
     ratings:[{
         star: Number,

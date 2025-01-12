@@ -32,13 +32,13 @@ const isAdmin = asyncHandler(async(req, res, next)=>{
     }
 });
 /*Validar si es fundación*/
-const isFoundation = asyncHandler(async(req, res, next)=>{
+const isCoach = asyncHandler(async(req, res, next)=>{
     const{email} = req.user;
-    const foundationUser = await User.findOne({email});
-    if(foundationUser.role !=="foundation"){
+    const CoachUser = await User.findOne({email});
+    if(CoachUser.role !=="Coach"){
         throw new Error("No eres una fundación");
     }else{
         next();
     }
 });
-module.exports={authMiddleware, isAdmin, isFoundation};
+module.exports={authMiddleware, isAdmin, isCoach};
