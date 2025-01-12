@@ -97,22 +97,22 @@ const createUser = asyncHandler(async (req, res) => {
     }
 });
 
-const loginFoundation = asyncHandler(async (req, res) => {
+const loginCoach = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-    const findFoundation = await User.findOne({ email });
+    const findCoach = await User.findOne({ email });
 
-    if (!findFoundation) {
+    if (!findCoach) {
         throw new Error("El usuario no existe");
     }
 
-    if (findFoundation.role !== "foundation") {
+    if (findCoach.role !== "Coach") {
         throw new Error("No está autorizado");
     }
 
-    if (await findFoundation.isPasswordMatched(password)) {
-        const refreshToken = await generateRefreshToken(findFoundation?._id);
+    if (await findCoach.isPasswordMatched(password)) {
+        const refreshToken = await generateRefreshToken(findCoach?._id);
         const updateuser = await User.findByIdAndUpdate(
-            findFoundation.id,
+            findCoach.id,
             {
                 refreshToken: refreshToken,
             },
@@ -127,13 +127,13 @@ const loginFoundation = asyncHandler(async (req, res) => {
         });
 
         res.json({
-            _id: findFoundation?._id,
-            firstname: findFoundation?.firstname,
-            lastname: findFoundation?.lastname,
-            email: findFoundation?.email,
-            mobile: findFoundation?.mobile,
-            address: findFoundation?.address,
-            token: generateToken(findFoundation?._id),
+            _id: findCoach?._id,
+            firstname: findCoach?.firstname,
+            lastname: findCoach?.lastname,
+            email: findCoach?.email,
+            mobile: findCoach?.mobile,
+            address: findCoach?.address,
+            token: generateToken(findCoach?._id),
         });
     } else {
         throw new Error("Contraseña o usuario inválido");
@@ -186,7 +186,7 @@ const loginFoundation = asyncHandler(async (req, res) => {
         const token = await user.createPasswordResetToken();
         await user.save();
         /*Ojo aquí para cuando lo subamos redirigirlos a la url de la subida*/
-        const resetURL = `Hola, sigue este link para reiniciar tu contraseña. Este link expirará en 10 minutos, contando desde ahora. <a href='http://localhost:5000/api/user/reset-password/${token}'>Click aqui</>`;
+        const resetURL = `Hola, Somos GymMaster, sigue este link para reiniciar tu contraseña. Este link expirará en 10 minutos, contando desde ahora. <a href='http://localhost:5000/api/user/reset-password/${token}'>Click aqui</>`; //Modificar cuando deploye
         const data = {
             to: email,
             subject: "Olvidaste tu constraseña link",
@@ -402,7 +402,7 @@ const unblockUser = asyncHandler(async (req, res) => {
 
 
   module.exports={
-    loginUserCtrl, createUser, loginAdmin, loginFoundation, updatedaUser, 
+    loginUserCtrl, createUser, loginAdmin, loginCoach, updatedaUser, 
     forgotPasswordToken, resetPassword, updatePassword, getaUser, getsUser, 
     rating, deletesUser, deleteallUser, blockUser, unblockUser,
   };

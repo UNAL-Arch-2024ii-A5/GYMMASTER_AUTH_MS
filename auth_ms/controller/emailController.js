@@ -14,7 +14,7 @@ const sendEmail = asyncHandler (async (data, req, res)=>{
     try{
 
         let info = await transporter.sendMail({
-            from: '"PetAdoption" <laballenadefajardo@gmail.com>',
+            from: '"GymMaster" <laballenadefajardo@gmail.com>',
             to: data.to,
             subject: data.subject,
             text: data.text,
