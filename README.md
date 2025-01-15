@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # GymMaster
-=======
-# Routine Management API
->>>>>>> DianaDev
 
 This is a **JavaScript-based RESTful API** built with **Express.js** for managing users, their authentication, and roles such as Admin and Coach. It supports user registration, login, and various user management features.
 
@@ -34,12 +30,6 @@ cd auth_ms
 
 ```bash
 npm install
-<<<<<<< HEAD
-npm install nodemon -g 
-nodemon index
-npm install dotenv
-npm run start
-=======
 ```
 
 ### Configure the Environment
@@ -235,4 +225,3 @@ To update the application:
    npm run start
    ```
 
->>>>>>> DianaDev
