@@ -36,7 +36,7 @@ const isCoach = asyncHandler(async(req, res, next)=>{
     const{email} = req.user;
     const CoachUser = await User.findOne({email});
     if(CoachUser.role !=="Coach"){
-        throw new Error("No eres una fundación");
+        throw new Error("No eres un coach");
     }else{
         next();
     }
