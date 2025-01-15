@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+require("dotenv").config(); 
 /*Conexion de la app con mongo Db Atlas*/
 const dbConnect = async () => {
     try {
