@@ -194,7 +194,7 @@ const loginCoach = asyncHandler(async (req, res) => {
             html: resetURL,
         };
         sendEmail(data);
-        res.json(token);
+        res.json({token});
         } catch (error) {
         throw new Error(error);
         }
@@ -303,14 +303,15 @@ const rating = asyncHandler(async(req,res)=>{
     }
   });
 /*Borrar todos los usuarios*/
-  const deleteallUser = asyncHandler(async(req,res)=>{
-    try{
-        const getUsers = await User.delete();
-        res.json(deleteallUser);
-    }catch (error){
-        throw new Error(error);
-    }
+const deleteallUser = asyncHandler(async (req, res) => {
+  try {
+      const deletedUsers = await User.deleteMany({}); // Borra todos los documentos
+      res.json({ message: "Todos los usuarios han sido eliminados", deletedCount: deletedUsers.deletedCount });
+  } catch (error) {
+      throw new Error(error);
+  }
 });
+
 //Bloquear usuario
 const blockUser = asyncHandler(async (req, res) => {
   const { id } = req.params;

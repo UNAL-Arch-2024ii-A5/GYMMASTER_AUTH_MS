@@ -1,4 +1,4 @@
-# GymMaster
+# Authentication API
 
 This is a **JavaScript-based RESTful API** built with **Express.js** for managing users, their authentication, and roles such as Admin and Coach. It supports user registration, login, and various user management features.
 
@@ -224,4 +224,3 @@ To update the application:
    ```bash
    npm run start
    ```
-
