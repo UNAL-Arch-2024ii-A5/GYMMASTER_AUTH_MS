@@ -15,19 +15,6 @@ services:
       - /index/node_modules
     networks:
       - shared_network
-
-  mongo:
-    image: mongo:5.0
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-    networks:
-      - shared_network
-
-volumes:
-  mongo-data:
 networks:
   shared_network:
     external: true
