@@ -47,7 +47,7 @@ const createUser = asyncHandler(async (req, res) => {
         email: findUser?.email,
         mobile: findUser?.mobile,
         wishlist: findUser?.wishlist,
-        token: generateToken(findUser?._id),
+        token: generateToken(findUser),
       });
     } else {
       throw new Error("Contraseña o usuario invalido");
@@ -90,7 +90,7 @@ const createUser = asyncHandler(async (req, res) => {
             email: findAdmin?.email,
             mobile: findAdmin?.mobile,
             address: findAdmin?.address,
-            token: generateToken(findAdmin?._id),
+            token: generateToken(findAdmin),
         });
     } else {
         throw new Error("Contraseña o usuario inválido");
@@ -133,7 +133,7 @@ const loginCoach = asyncHandler(async (req, res) => {
             email: findCoach?.email,
             mobile: findCoach?.mobile,
             address: findCoach?.address,
-            token: generateToken(findCoach?._id),
+            token: generateToken(findCoach),
         });
     } else {
         throw new Error("Contraseña o usuario inválido");
@@ -186,7 +186,7 @@ const loginCoach = asyncHandler(async (req, res) => {
         const token = await user.createPasswordResetToken();
         await user.save();
         /*Ojo aquí para cuando lo subamos redirigirlos a la url de la subida*/
-        const resetURL = `Hola, Somos GymMaster, sigue este link para reiniciar tu contraseña. Este link expirará en 10 minutos, contando desde ahora. <a href='http://localhost:5000/api/user/reset-password/${token}'>Click aqui</>`; //Modificar cuando deploye
+        const resetURL = `Hola, Somos GymMaster, sigue este link para reiniciar tu contraseña. Este link expirará en 10 minutos, contando desde ahora. El token a ingresar es el siguiente: ${token} <a href='http://localhost:5173/forgot-passwordP'>Click aqui</> .`; //Modificar cuando deploye
         const data = {
             to: email,
             subject: "Olvidaste tu constraseña link",

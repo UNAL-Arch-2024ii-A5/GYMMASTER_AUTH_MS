@@ -4,6 +4,8 @@ const {
     forgotPasswordToken, resetPassword, updatePassword, getaUser, 
     getsUser, rating, deletesUser, deleteallUser 
 } = require('../controller/userController');
+const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
 
 const router = express.Router();
 const { authMiddleware, isAdmin, isCoach } = require("../middlewares/authMiddleware");
@@ -13,6 +15,27 @@ router.post("/register", createUser);
 router.post("/login", loginUserCtrl);
 router.post("/admin-login", loginAdmin);
 router.post("/coach-login", loginCoach);
+router.post("/validate-token", async (req, res) => {
+  const { token } = req.body;
+  if (!token) {
+    return res.status(401).json({ message: "Token no proporcionado" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select("-password");
+
+    if (!user) {
+      return res.status(401).json({ message: "Usuario no encontrado" });
+    }
+
+    console.log("✅ Usuario validado en /validate-token:", user);
+    res.json({ user });
+  } catch (error) {
+    console.error("🚨 Error al validar token:", error);
+    res.status(401).json({ message: "Token inválido o expirado" });
+  }
+});
 
 // 📌 Recuperación de contraseña
 router.post("/forgot-password-token", forgotPasswordToken);
